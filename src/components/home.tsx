@@ -98,7 +98,7 @@ export default function Home() {
         >
           <Box
             component="img"
-            src="Juventus Jersey.jpg"
+            src="https://res.cloudinary.com/deep38tbr/image/upload/v1743666903/slpgnz2kor6mn38aefia.jpg"
             alt="Profile Image"
             sx={{
               width: "100%",

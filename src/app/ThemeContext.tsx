@@ -19,16 +19,7 @@ declare module "@mui/material/styles" {
 }
 
 const themes = {
-  default: createTheme({
-    palette: {
-      mode: "dark",
-      background: { default: "#191414" },
-      text: { primary: "#FFFFFF", secondary: "#B3B3B3" },
-      tertiary: "#1DB954", 
-      shadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
-      shadowHover: "0px 6px 14px rgba(0, 0, 0, 0.7)",
-    },
-  }),
+
   light: createTheme({
     palette: {
       mode: "light",
@@ -49,26 +40,7 @@ const themes = {
       shadowHover: "0px 6px 18px rgba(255, 255, 255, 0.2)",
     },
   }),
-  cyberpunk: createTheme({
-    palette: {
-      mode: "dark",
-      background: { default: "#0f0c29" },
-      text: { primary: "#ff00ff", secondary: "#00ffff" },
-      tertiary: "#ffcc00",
-      shadow: "0px 4px 16px rgba(255, 0, 255, 0.5)",
-      shadowHover: "0px 6px 22px rgba(255, 0, 255, 0.7)",
-    },
-  }),
-  professional: createTheme({
-    palette: {
-      mode: "dark",
-      background: { default: "#1E1E1E" },
-      text: { primary: "#D4D4D4", secondary: "#A0A0A0" },
-      tertiary: "#007ACC",
-      shadow: "0px 4px 14px rgba(0, 0, 0, 0.4)",
-      shadowHover: "0px 6px 20px rgba(0, 0, 0, 0.6)",
-    },
-  }),
+
   
 };
 
@@ -83,13 +55,13 @@ const ThemeContext = createContext<{
   themes: typeof themes;
   setTheme: React.Dispatch<React.SetStateAction<ThemeKey>>;
 }>({
-  theme: "default",
+  theme: "light",
   themes,
   setTheme: () => {}, 
 });
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<ThemeKey>("default"); 
+  const [theme, setTheme] = useState<ThemeKey>("light"); 
 
   return (
     <ThemeContext.Provider value={{ theme, themes, setTheme }}>

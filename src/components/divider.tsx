@@ -1,8 +1,19 @@
+'use client'
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Divider from '@mui/material/Divider';
-import Chip from '@mui/material/Chip';
-
+import Home from './home';
+import ContentBox from './regularContent';
+import ExperienceBox from './contentHolder';
+import Gallery from './gallery';
+import ProjectList from './projectComponent';
+import ResponsiveHeading from './contentDivider';
+import PersonIcon from '@mui/icons-material/Person';
+import WorkIcon from '@mui/icons-material/WorkHistory';
+import CodeIcon from '@mui/icons-material/Code';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import ContactsIcon from '@mui/icons-material/Contacts';
+import Contact from './contactComponent';
 const Root = styled('div')(({ theme }) => ({
   width: '100%',
   ...theme.typography.body2,
@@ -13,23 +24,32 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 export default function DividerText() {
-  const content = (
-    <p>{`Lorem ipsum dolor sit amet, consectetur adipiscing elit.`}</p>
-  );
 
   return (
     <Root>
-      {content}
-      <Divider>CENTER</Divider>
-      {content}
-      <Divider textAlign="left">LEFT</Divider>
-      {content}
-      <Divider textAlign="right">RIGHT</Divider>
-      {content}
+      <Home/>
       <Divider>
-        <Chip label="Chip" size="small" />
+        <PersonIcon id="about" sx={{fontSize:"2rem"}}/>
       </Divider>
-      {content}
+      <ContentBox/>
+      <Divider>
+       <WorkIcon id="experience" sx={{fontSize:"2rem"}}/>
+      </Divider>
+      <ExperienceBox />
+      <Divider>
+        <CodeIcon id="skills" sx={{fontSize:"2rem"}}/>
+      </Divider>
+         <Gallery/>
+      <Divider>
+        <GitHubIcon id="projects" sx={{fontSize:"2rem"}}/>
+      </Divider>
+        <ResponsiveHeading heading="Projects">
+         <ProjectList/>
+        </ResponsiveHeading>
+        <Divider>
+        <ContactsIcon id="contacts" sx={{fontSize:"2rem"}}/>
+      </Divider>
+         <Contact/>
     </Root>
   );
 }

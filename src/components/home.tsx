@@ -9,7 +9,7 @@ export default function Home() {
     <Box
       id="home"
       sx={{
-        minHeight: "80vh",
+        minHeight: "95vh",
         display: "flex",
         flexDirection: { xs: "column-reverse", md: "row" },
         justifyContent: "center",
@@ -17,6 +17,7 @@ export default function Home() {
         backgroundColor: themes[currentTheme].palette.background.default,
         padding: { xs: "2rem", md: "4rem" },
         margin: 0,
+        marginTop:-3
       }}
     >
       {/* Left Content Section (70%) */}
@@ -33,7 +34,7 @@ export default function Home() {
           variant="h6"
           sx={{
             color: themes[currentTheme].palette.text.secondary,
-            marginTop: 2,
+            marginTop: 0,
             fontSize: { xs: "1rem", md: "1.25rem", lg: "1.5rem" },
             paddingLeft:"5px"
           }}

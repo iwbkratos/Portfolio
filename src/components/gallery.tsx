@@ -23,7 +23,7 @@ export default function SkillsGallery() {
     <Box
       sx={{
         width: "100%",
-        // maxWidth: "900px", // Ensures content fits well within screen
+        minHeight:"100vh",
         margin: "0 auto", // Centers content
         padding: { xs: "1rem", md: "2rem" },
         background: themes[currentTheme].palette.background.default,
@@ -38,6 +38,7 @@ export default function SkillsGallery() {
           marginBottom: "1.5rem",
           textTransform: "uppercase",
           letterSpacing: 1,
+          marginLeft:3,
           fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
         }}
       >
@@ -60,8 +61,8 @@ export default function SkillsGallery() {
             label={skill.name}
             avatar={<Avatar src={skill.image} alt={skill.name} />}
             sx={{
-              width: "150px", // Ensures all chips have equal width
-              height: "55px", // Consistent chip height
+              width: "150px", 
+              height: "55px", 
               background: themes[currentTheme].palette.background.paper,
               color: themes[currentTheme].palette.text.primary,
               fontSize: "1rem",

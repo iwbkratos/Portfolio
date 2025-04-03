@@ -6,12 +6,10 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
+import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { Switch, styled } from "@mui/material";
+import { Menu, MenuItem, Switch, styled } from "@mui/material";
 import { useThemeContext } from "../app/ThemeContext";
 
 const navItems = ["Home", "About", "Experience", "Skills", "Projects", "Contacts"];
@@ -78,6 +76,18 @@ const CustomAppBar: React.FC = () => {
   const { theme: currentTheme, themes, setTheme } = useThemeContext();
   const isDarkMode = currentTheme === "dark";
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [activeMenu, setActiveMenu] = useState(navItems[0]);
+  
+  const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = (item?: string) => {
+    if (item) setActiveMenu(item);
+    setAnchorEl(null);
+  };
+
   return (
     <AppBar
       position="sticky"
@@ -85,7 +95,7 @@ const CustomAppBar: React.FC = () => {
         borderBottom: `1px solid ${themes[currentTheme].palette.text.primary}`,
         backgroundColor: themes[currentTheme].palette.background.default,
         boxShadow: 1,
-        minHeight: "15vh",
+        minHeight: "10vh",
         justifyContent: "center",
       }}
     >
@@ -96,21 +106,32 @@ const CustomAppBar: React.FC = () => {
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           {isMobile ? (
-            <SpeedDial
-              ariaLabel="Navigation Speed Dial"
-              icon={<SpeedDialIcon />}
-              direction="up"
-              sx={{ position: "fixed", bottom: 16, right: 16 }}
+            <><Button
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleMenuClick}
+              sx={{ color: themes[currentTheme].palette.text.primary }}
             >
-              {navItems.map((item, index) => (
-                <SpeedDialAction
-                  key={index}
-                  icon={<Typography variant="button" sx={{ color: themes[currentTheme].palette.text.primary }}>{item}</Typography>}
-                  tooltipTitle={item}
-                  onClick={() => document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: "smooth" })}
-                />
-              ))}
-            </SpeedDial>
+              <MenuIcon/>
+            </Button><Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={() => handleMenuClose()}
+            >
+                {navItems.map((item, index) => (
+                  <MenuItem
+                    key={index}
+                    onClick={() => handleMenuClose(item)}
+                    sx={{
+                      color: themes[currentTheme].palette.text.primary,
+                      boxShadow: activeMenu === item ? 2 : "none",
+                    }}
+                  >
+                    {item}
+                  </MenuItem>
+                ))}
+              </Menu></>
           ) : (
             <Box sx={{ display: "flex", gap: 2, ml: "auto" }}>
               {navItems.map((item, index) => (
@@ -130,7 +151,7 @@ const CustomAppBar: React.FC = () => {
             </Box>
           )}
           {/* Theme Toggle Switch */}
-          <Box sx={{ ml: 2 }}>
+          <Box sx={{ ml: 0, mr:-3 }}>
             <MaterialUISwitch
               checked={isDarkMode}
               onChange={() => setTheme(isDarkMode ? "light" : "dark")}

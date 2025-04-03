@@ -84,7 +84,10 @@ const CustomAppBar: React.FC = () => {
   };
 
   const handleMenuClose = (item?: string) => {
-    if (item) setActiveMenu(item);
+    if (item){
+      setActiveMenu(item);
+      document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: "smooth" })
+    }
     setAnchorEl(null);
   };
 

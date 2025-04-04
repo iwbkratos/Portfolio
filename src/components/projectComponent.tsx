@@ -20,7 +20,8 @@ const ProjectCard = ({ title, description, image, link }: any) => {
           boxShadow: 6,
         },
         p: 2,
-        borderRadius:10
+        borderRadius:10,
+        maxHeight: 500
       }}
     >
       <Box

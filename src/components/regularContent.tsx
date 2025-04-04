@@ -64,10 +64,10 @@ export default function ContentBox() {
         }}
       >
         <Image
-          src="/workexp.png" // Replace with actual image path
+          src="/about.png" // Replace with actual image path
           alt={"work"}
-          width={500} 
-          height={600} 
+          width={300} 
+          height={400} 
           style={{
             borderRadius: "12px",
             objectFit: "cover",
@@ -108,12 +108,12 @@ export default function ContentBox() {
           >
             <Card
               sx={{
-                background: themes[currentTheme].palette.background.paper,
+                background: themes[currentTheme].palette.background.default,
                 color: themes[currentTheme].palette.text.primary,
                 boxShadow: "none",
               }}
             >
-              <CardContent>
+              <CardContent  >
                 <Typography variant="h4"
                       sx={{
                       color: themes[currentTheme].palette.text.primary,
@@ -131,7 +131,8 @@ export default function ContentBox() {
                     <ListItem key={i} sx={{ paddingLeft: 0 }}>
                       <ListItemText 
                         primary={`${point}`} 
-                        primaryTypographyProps={{ color: themes[currentTheme].palette.text.secondary }} 
+                        primaryTypographyProps={{ color: themes[currentTheme].palette.text.secondary, fontSize:"1.3rem" }} 
+                       
                       />
                     </ListItem>
                   ))}

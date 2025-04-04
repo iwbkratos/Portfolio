@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import './globals.css'
 import CustomAppBar from "@/components/customAppBar";
 import { ThemeProvider } from "./ThemeContext";
+import FloatingAudioPlayer from "@/components/floatinAudioPlayer";
 
 export const metadata: Metadata = {
   title: "Guna's Portfolio",
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <CustomAppBar/>
+          <FloatingAudioPlayer/>
           {children}
         </ThemeProvider>
       </body>

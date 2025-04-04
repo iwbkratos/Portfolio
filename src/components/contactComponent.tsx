@@ -1,14 +1,15 @@
 'use client'
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Card, CardMedia, Button } from "@mui/material";
 import { useThemeContext } from "../app/ThemeContext";
 import LinkIcon from "@mui/icons-material/Link";
+import Image from "next/image";
 
 const socialLinks = [
-  { name: "Instagram", url:process.env.NEXT_PUBLIC_INSTAGRAM_URL , icon: <LinkIcon /> },
-  { name: "LinkedIn", url: process.env.NEXT_PUBLIC_LINKEDIN, icon: <LinkIcon /> },
-  { name: "Reddit", url: process.env.NEXT_PUBLIC_REDDIT_URL, icon: <LinkIcon /> },
-  { name: "Discord", url: process.env.NEXT_PUBLIC_DISCORD_URL, icon: <LinkIcon /> },
+  { name: "Instagram", url:process.env.NEXT_PUBLIC_INSTAGRAM_URL , icon: "/instagram.png" },
+  { name: "LinkedIn", url: process.env.NEXT_PUBLIC_LINKEDIN, icon: "/linkedin.png" },
+  { name: "Reddit", url: process.env.NEXT_PUBLIC_REDDIT_URL, icon: "/reddit.png" },
+  { name: "Discord", url: process.env.NEXT_PUBLIC_DISCORD_URL, icon: "/discord.png" },
 
 ];
 
@@ -46,7 +47,7 @@ const Contact = () => {
         }}
       >
         {socialLinks.map((link, index) => (
-          <Box
+          <Button
             key={index}
             sx={{
               display: "flex",
@@ -59,7 +60,7 @@ const Contact = () => {
               width: "100%",
             }}
           >
-            {link.icon}
+           <Image src={link?.icon} alt={link?.name} width={30} height={30}></Image>
             <a
               href={link.url}
               target="_blank"
@@ -73,7 +74,7 @@ const Contact = () => {
             >
               {link.name}
             </a>
-          </Box>
+          </Button>
         ))}
       </Box>
     </Box>

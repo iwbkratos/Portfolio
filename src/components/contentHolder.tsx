@@ -12,10 +12,10 @@ const experiences = [
     duration: "March 2024 - Present",
     description: [
       "Developed a functionality to retrieve transaction details, including invoice payments, bill payments, and deposits, using ASP.NET Core & Entity Framework.",
-      "Implemented a streamlined payment and deposit process, reducing processing time and enhancing user experience by 35%.",
-      "Integrated Sure App into a Next.js project via Iframe, streamlining renter insurance processes and boosting operational efficiency by 40%.",
+      "Implemented a streamlined payment and deposit process, reducing processing time and enhanced user experience.",
+      "Integrated Sure App into a Next.js project via Iframe, streamlining renter insurance processes and boosted operational efficiency.",
       "Utilized Redux Toolkit and TypeScript for state management in a Next.js app, reducing API calls by 25% and boosting app responsiveness.",
-      "Conceptualized and implemented a split invoice feature to efficiently generate multiple invoices for different users. Automated the process, significantly reducing processing time eliminating 80% of manual effort."
+      "Conceptualized and implemented a split invoice feature to efficiently generate multiple invoices for different users. Automated the process, significantly reducing processing time of manual effort."
     ],
   }
 ];
@@ -76,10 +76,10 @@ export default function ExperienceBox() {
         }}
       >
         <Image
-          src="/coding.png" // Replace with actual image path
+          src="/developer.png" // Replace with actual image path
           alt="Experience"
-          width={500} 
-          height={600} 
+          width={300} 
+          height={400} 
           style={{
             borderRadius: "12px",
             objectFit: "cover",
@@ -121,7 +121,7 @@ export default function ExperienceBox() {
           >
             <Card
               sx={{
-                background: themes[currentTheme].palette.background.paper,
+                background: themes[currentTheme].palette.background.default,
                 color: themes[currentTheme].palette.text.primary,
                 boxShadow: "none",
               }}
@@ -143,7 +143,7 @@ export default function ExperienceBox() {
                     <ListItem key={i} sx={{ paddingLeft: 0 }}>
                       <ListItemText 
                         primary={`• ${point}`} 
-                        primaryTypographyProps={{ color: themes[currentTheme].palette.text.secondary }} 
+                        primaryTypographyProps={{ color: themes[currentTheme].palette.text.secondary, fontSize:"1.2rem" }} 
                       />
                     </ListItem>
                   ))}

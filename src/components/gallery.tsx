@@ -10,7 +10,7 @@ const skills = [
   { name: "C#", image: "https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/csharp/csharp-original.svg" },
   { name: "SQL Server", image: "https://cdn.jsdelivr.net/npm/devicon@2.16.0/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" },
   { name: ".NET Core", image: "https://commons.wikimedia.org/wiki/File:.NET_Core_Logo.svg" },
-  { name: "TypeScript", image: "https://brandfetch.com/typescriptlang.org?view=library&library=default&collection=logos&asset=idwGgjjT4C" },
+  { name: "TypeScript", image: "https://res.cloudinary.com/deep38tbr/image/upload/v1744018669/typescript_hrgmh9.png" },
   { name: "JavaScript", image: "https://res.cloudinary.com/deep38tbr/image/upload/v1743621972/etecjlufut8euy3tip6p.png" },
   { name: "Git", image: "https://res.cloudinary.com/deep38tbr/image/upload/v1743622511/o0dpkz40pul9hid1h5rp.png" },
   { name: "GitHub", image: "https://res.cloudinary.com/deep38tbr/image/upload/v1743622583/o0uanjn6cu88ib6nda7t.png" },
@@ -40,6 +40,7 @@ export default function SkillsGallery() {
           letterSpacing: 1,
           marginLeft:3,
           fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+          fontFamily:themes[currentTheme].palette.fontFamily
         }}
       >
         Skills
@@ -66,6 +67,7 @@ export default function SkillsGallery() {
               background: themes[currentTheme].palette.background.paper,
               color: themes[currentTheme].palette.text.primary,
               fontSize: "1rem",
+              fontFamily:themes[currentTheme].palette.fontFamily,
               fontWeight: "bold",
               borderRadius: "28px",
               border: `2px solid ${themes[currentTheme].palette.primary.main}`, // Added border

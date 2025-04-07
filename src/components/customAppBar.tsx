@@ -1,15 +1,23 @@
 'use client'
-import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
+import React, { useEffect, useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Button,
+  Container,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  IconButton,
+  Switch,
+  styled
+} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
-import { Menu, MenuItem, Switch, styled } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import { useThemeContext } from "../app/ThemeContext";
 
 const navItems = ["Home", "About", "Experience", "Skills", "Projects", "Contacts"];
@@ -24,145 +32,176 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     transform: 'translateX(4px)',
     '&.Mui-checked': {
       color: 'black',
-      backgroundColor:'#ffff',
+      backgroundColor: '#fff',
       transform: 'translateX(18px)',
-      '& .MuiSwitch-thumb:before': {
-        backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-          '#fff',
-        )}" d="M4.2 2.5l-.7 1.8-1.8.7 1.8.7.7 1.8.6-1.8L6.7 5l-1.9-.7-.6-1.8zm15 8.3a6.7 6.7 0 11-6.6-6.6 5.8 5.8 0 006.6 6.6z"/></svg>')`,
-      },
-      '& + .MuiSwitch-track': {
-        opacity: 1,
-        backgroundColor: '#aab4be',
-        ...theme.applyStyles('dark', {
-          backgroundColor: '#8796A5',
-        }),
-      },
     },
   },
   '& .MuiSwitch-thumb': {
     backgroundColor: '#001e3c',
     width: 22,
     height: 22,
-    '&::before': {
-      content: "''",
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      left: 0,
-      top: 0,
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-      backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
-        '#fff',
-      )}" d="M9.305 1.667V3.75h1.389V1.667h-1.39zm-4.707 1.95l-.982.982L5.09 6.072l.982-.982-1.473-1.473zm10.802 0L13.927 5.09l.982.982 1.473-1.473-.982-.982zM10 5.139a4.872 4.872 0 00-4.862 4.86A4.872 4.872 0 0010 14.862 4.872 4.872 0 0014.86 10 4.872 4.872 0 0010 5.139zm0 1.389A3.462 3.462 0 0113.471 10a3.462 3.462 0 01-3.473 3.472A3.462 3.462 0 016.527 10 3.462 3.462 0 0110 6.528zM1.665 9.305v1.39h2.083v-1.39H1.666zm14.583 0v1.39h2.084v-1.39h-2.084zM5.09 13.928L3.616 15.4l.982.982 1.473-1.473-.982-.982zm9.82 0l-.982.982 1.473 1.473.982-.982-1.473-1.473zM9.305 16.25v2.083h1.389V16.25h-1.39z"/></svg>')`,
-    },
-    ...theme.applyStyles('dark', {
-      backgroundColor: '#003892',
-    }),
   },
   '& .MuiSwitch-track': {
     opacity: 1,
     backgroundColor: '#aab4be',
     borderRadius: 20 / 2,
-    ...theme.applyStyles('dark', {
-      backgroundColor: '#8796A5',
-    }),
   },
 }));
+
 const CustomAppBar: React.FC = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const { theme: currentTheme, themes, setTheme } = useThemeContext();
   const isDarkMode = currentTheme === "dark";
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [activeMenu, setActiveMenu] = useState(navItems[0]);
-  
-  const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(navItems[0]);
+
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
   };
 
-  const handleMenuClose = (item?: string) => {
-    if (item){
-      setActiveMenu(item);
-      document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: "smooth" })
-    }
-    setAnchorEl(null);
+  const handleNavClick = (item: string) => {
+    document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: "smooth" });
+    setActiveSection(item);
+    setDrawerOpen(false);
   };
+
+  // Observe which section is currently visible
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    navItems.forEach(item => {
+      const section = document.getElementById(item.toLowerCase());
+      if (!section) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(item);
+          }
+        },
+        {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.5, // 50% of section must be visible
+        }
+      );
+
+      observer.observe(section);
+      observers.push(observer);
+    });
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
 
   return (
-    <AppBar
-      position="sticky"
-      sx={{
-        borderBottom: `1px solid ${themes[currentTheme].palette.text.primary}`,
-        backgroundColor: themes[currentTheme].palette.background.default,
-        boxShadow: 1,
-        minHeight: "10vh",
-        justifyContent: "center",
-      }}
-    >
-      <Container maxWidth="lg">
-        <Toolbar>
-          <Typography variant="h4" sx={{ color: themes[currentTheme].palette.text.primary }}>
-            Guna's <Typography component="span" variant="h4" sx={{ color: themes[currentTheme].palette.text.secondary }}>Portfolio</Typography>
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          {isMobile ? (
-            <><Button
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenuClick}
-              sx={{ color: themes[currentTheme].palette.text.primary }}
-            >
-              <MenuIcon/>
-            </Button><Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={() => handleMenuClose()}
-            >
-                {navItems.map((item, index) => (
-                  <MenuItem
-                    key={index}
-                    onClick={() => handleMenuClose(item)}
-                    sx={{
-                      color: themes[currentTheme].palette.text.primary,
-                      boxShadow: activeMenu === item ? 2 : "none",
-                    }}
-                  >
-                    {item}
-                  </MenuItem>
-                ))}
-              </Menu></>
-          ) : (
-            <Box sx={{ display: "flex", gap: 2, ml: "auto" }}>
+    <>
+      <AppBar
+        position="sticky"
+        sx={{
+          borderBottom: `1px solid ${themes[currentTheme].palette.text.primary}`,
+          backgroundColor: themes[currentTheme].palette.background.default,
+          boxShadow: 1,
+          minHeight: "10vh",
+          justifyContent: "center",
+        }}
+      >
+        <Container maxWidth="lg">
+          <Toolbar>
+            <Typography variant="h4" sx={{ color: themes[currentTheme].palette.text.primary, fontSize:"18px", fontFamily:themes[currentTheme].palette.fontFamily }}>
+              GUNASEKRAN RAGUNATHAN{" "}
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+
+            {/* Mobile menu button */}
+            <Box sx={{ display: { xs: "block", md: "none" } }}>
+              <IconButton onClick={handleDrawerToggle} sx={{ color: themes[currentTheme].palette.text.primary, fontFamily:themes[currentTheme].palette.fontFamily }}>
+                <MenuIcon />
+              </IconButton>
+            </Box>
+
+            {/* Desktop nav buttons */}
+            <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2, ml: "auto" }}>
               {navItems.map((item, index) => (
                 <Button
                   key={index}
-                  onClick={() => document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: "smooth" })}
-                  sx={{ color: themes[currentTheme].palette.text.primary, '&:hover': {
-                    backgroundColor: themes[currentTheme].palette.shadow,
-                    color: themes[currentTheme].palette.text.primary,
-                  }, }}
+                  onClick={() => handleNavClick(item)}
+                  sx={{
+                    color: activeSection === item
+                      ? themes[currentTheme].palette.text.secondary
+                      : themes[currentTheme].palette.text.primary,
+                    fontWeight: activeSection === item ? "bold" : "normal",
+                    fontFamily:themes[currentTheme].palette.fontFamily,
+                    borderBottom: activeSection === item ? `2px solid ${themes[currentTheme].palette.text.secondary}` : "none",
+                    borderRadius: 0,
+                    '&:hover': {
+                      borderBottom: `2px solid ${themes[currentTheme].palette.text.secondary}`,
+                      backgroundColor: 'transparent',
+                    },
+                    
+                  }}
                 >
-                  <Typography variant="button" sx={{ textTransform: "none" }}>
+                  <Typography variant="button" sx={{ textTransform: "none", fontFamily:themes[currentTheme].palette.fontFamily }}>
                     {item}
                   </Typography>
                 </Button>
               ))}
             </Box>
-          )}
-          {/* Theme Toggle Switch */}
-          <Box sx={{ ml: 0, mr:-3 }}>
-            <MaterialUISwitch
-              checked={isDarkMode}
-              onChange={() => setTheme(isDarkMode ? "light" : "dark")}
-            />
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+
+            {/* Theme toggle */}
+            <Box sx={{ ml: 0, mr: -3 }}>
+              <MaterialUISwitch
+                checked={isDarkMode}
+                onChange={() => setTheme(isDarkMode ? "light" : "dark")}
+              />
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      {/* Drawer for mobile */}
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={handleDrawerToggle}
+        sx={{
+          '& .MuiDrawer-paper': {
+            width: '60vw',
+            backgroundColor: themes[currentTheme].palette.background.default,
+            color: themes[currentTheme].palette.text.primary,
+          },
+        }}
+      >
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+          <IconButton onClick={handleDrawerToggle}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <List>
+          {navItems.map((item, index) => (
+            <ListItem key={index} disablePadding>
+              <ListItemButton
+                onClick={() => handleNavClick(item)}
+                selected={activeSection === item}
+                sx={{
+                  '&.Mui-selected': {
+                    backgroundColor: themes[currentTheme].palette.action.selected,
+                    fontWeight: "bold",
+                  },
+                  '&:hover': {
+                    borderBottom: `2px solid ${themes[currentTheme].palette.text.secondary}`,
+                    backgroundColor: 'transparent',
+                  },
+                }}
+              >
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </>
   );
 };
 

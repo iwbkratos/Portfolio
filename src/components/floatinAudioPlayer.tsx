@@ -23,36 +23,33 @@ const FloatingAudioPlayer = () => {
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
-    // Set song
+  
+    // Set the initial audio source
     audio.src = songList[currentSongIndex];
     audio.muted = true;
-
-    const handleUserInteraction = () => {
-      if (audio) {
-        audio.play().then(() => {
-          audio.muted = false;
-          setIsMuted(false);
-        });
-      }
-      document.removeEventListener("click", handleUserInteraction);
-    };
-
-    document.addEventListener("click", handleUserInteraction);
-
+  
+    // Tooltip timeout
     const timer = setTimeout(() => setShowTooltip(false), 3000);
     return () => clearTimeout(timer);
   }, [currentSongIndex]);
-
-  const toggleMute = () => {
+  
+  const toggleMute = async () => {
     const audio = audioRef.current;
-    if (audio) {
+    if (!audio) return;
+  
+    try {
+      if (audio.paused) {
+        await audio.play(); // Start the audio if not already playing
+      }
+  
       const newMuted = !isMuted;
       audio.muted = newMuted;
       setIsMuted(newMuted);
+    } catch (err) {
+      console.log("Playback failed:", err);
     }
   };
-
+  
   const handleSongEnd = () => {
     setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songList.length);
   };

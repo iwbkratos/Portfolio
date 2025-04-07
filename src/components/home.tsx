@@ -36,6 +36,7 @@ export default function Home() {
             color: themes[currentTheme].palette.text.secondary,
             marginTop: 0,
             fontSize: { xs: "1rem", md: "1.25rem", lg: "1.5rem" },
+            fontFamily:themes[currentTheme].palette.fontFamily,
             paddingLeft:"5px"
           }}
         >
@@ -48,15 +49,17 @@ export default function Home() {
             fontWeight: "bold",
             textTransform: "uppercase",
             fontSize: { xs: "2rem", md: "3rem", lg: "4rem" },
+            fontFamily:themes[currentTheme].palette.fontFamily
           }}
         >
-          GUNASEKRAN R
+          GUNASEKRAN 
         </Typography>
         <Typography
           variant="h3"
           sx={{
             color: themes[currentTheme].palette.text.secondary,
             fontWeight: "bold",
+            fontFamily:themes[currentTheme].palette.fontFamily,
             textTransform: "uppercase",
             fontSize: { xs: "2rem", md: "3rem", lg: "4rem" },
           }}
@@ -69,6 +72,7 @@ export default function Home() {
             color: themes[currentTheme].palette.text.secondary,
             marginTop: 2,
             fontSize: { xs: "1rem", md: "1.25rem", lg: "1.5rem" },
+            fontFamily:themes[currentTheme].palette.fontFamily,
             maxWidth: "800px",
           }}
         >

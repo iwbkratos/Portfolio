@@ -107,6 +107,7 @@ export default function ExperienceBox() {
             textAlign: "left",
             textTransform: "uppercase",
             letterSpacing: 1,
+            fontFamily:themes[currentTheme].palette.fontFamily
           }}
         >
            Experience
@@ -127,13 +128,13 @@ export default function ExperienceBox() {
               }}
             >
               <CardContent>
-                <Typography variant="h6" sx={{ fontWeight: "bold", color: themes[currentTheme].palette.text.primary }}>
+                <Typography variant="h6" sx={{ fontWeight: "bold", color: themes[currentTheme].palette.text.primary, fontFamily:themes[currentTheme].palette.fontFamily }}>
                   {exp.title}
                 </Typography>
-                <Typography variant="subtitle1" sx={{ color: themes[currentTheme].palette.text.secondary }}>
+                <Typography variant="subtitle1" sx={{ color: themes[currentTheme].palette.text.secondary, fontFamily:themes[currentTheme].palette.fontFamily }}>
                   {exp.company}
                 </Typography>
-                <Typography variant="body2" sx={{ color: themes[currentTheme].palette.tertiary }}>
+                <Typography variant="body2" sx={{ color: themes[currentTheme].palette.link, fontFamily:themes[currentTheme].palette.fontFamily }}>
                   {exp.duration}
                 </Typography>
 
@@ -143,7 +144,7 @@ export default function ExperienceBox() {
                     <ListItem key={i} sx={{ paddingLeft: 0 }}>
                       <ListItemText 
                         primary={`• ${point}`} 
-                        primaryTypographyProps={{ color: themes[currentTheme].palette.text.secondary, fontSize:"1.2rem" }} 
+                        primaryTypographyProps={{ color: themes[currentTheme].palette.text.secondary, fontSize:"1.2rem", fontFamily:themes[currentTheme].palette.fontFamily }} 
                       />
                     </ListItem>
                   ))}

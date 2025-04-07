@@ -117,6 +117,7 @@ export default function ContentBox() {
                 <Typography variant="h4"
                       sx={{
                       color: themes[currentTheme].palette.text.primary,
+                      fontFamily: themes[currentTheme].palette.fontFamily,
                       fontWeight: "bold",
                       textAlign: "left",
                       textTransform: "uppercase",
@@ -131,7 +132,7 @@ export default function ContentBox() {
                     <ListItem key={i} sx={{ paddingLeft: 0 }}>
                       <ListItemText 
                         primary={`${point}`} 
-                        primaryTypographyProps={{ color: themes[currentTheme].palette.text.secondary, fontSize:"1.3rem" }} 
+                        primaryTypographyProps={{ color: themes[currentTheme].palette.text.secondary, fontSize:"1.3rem", fontFamily:themes[currentTheme].palette.fontFamily }} 
                        
                       />
                     </ListItem>

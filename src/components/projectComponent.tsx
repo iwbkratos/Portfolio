@@ -33,16 +33,16 @@ const ProjectCard = ({ title, description, image, link }: any) => {
         <CardMedia component="img" height="200" image={image} alt={title} sx={{  borderRadius:10}} />
       </Box>
       <CardContent >
-        <Typography gutterBottom variant="h5" component="div" sx={{borderBottom:`1px solid ${themes[currentTheme].palette.text.primary}`}}>
+        <Typography gutterBottom variant="h5" component="div" sx={{borderBottom:`1px solid ${themes[currentTheme].palette.text.primary}`, fontFamily:themes[currentTheme].palette.fontFamily}}>
           {title}
         </Typography>
-        <Typography variant="body2" color={themes[currentTheme].palette.text.secondary}>
+        <Typography variant="body2" color={themes[currentTheme].palette.text.secondary} sx={{fontFamily:themes[currentTheme].palette.fontFamily}}>
           {description}
         </Typography>
       </CardContent>
       <Box sx={{ display: "flex", justifyContent: "center", p: 2 }}>
         <a href={link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: themes[currentTheme].palette.primary.main }}>
-        <Typography variant="body2" color={themes[currentTheme].palette.tertiary}>
+        <Typography variant="body2" color={themes[currentTheme].palette.link} sx={{fontFamily:themes[currentTheme].palette.fontFamily}}>
           GitHub <LinkIcon sx={{ fontSize: 30 }} />
         </Typography> 
         </a>
@@ -62,15 +62,9 @@ const ProjectList = () => {
     },
     {
       title: "Random Blog",
-      description: "An accounting dashboard with user invoice management, bill payments, and transaction history, optimized for fast API responses.",
+      description: "A blog is an online journal or informational website. It features regularly updated posts written in an informal or conversational style. Blogs can cover any topic, from personal experiences to professional insights",
       image: "https://res.cloudinary.com/deep38tbr/image/upload/v1743674871/Screenshot_2025-04-03_153608_c4kbq8.png",
       link: "https://github.com/iwbkratos/Blog-nextJS",
-    },
-    {
-      title: "Portfolio Website",
-      description: "A personal portfolio showcasing skills, experience, and projects with a dynamic dark mode and smooth navigation.",
-      image: "https://res.cloudinary.com/deep38tbr/image/upload/v1743674864/Screenshot_2025-04-03_153109_nzxcnm.png",
-      link: "https://github.com/iwbkratos/Portfolio",
     },
   ];
   

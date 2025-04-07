@@ -7,14 +7,18 @@ import CssBaseline from "@mui/material/CssBaseline";
 declare module "@mui/material/styles" {
   interface Palette {
     tertiary: string;
+    link:string;
     shadow: string;
     shadowHover: string;
+    fontFamily:string;
   }
 
   interface PaletteOptions {
     tertiary?: string;
+    link?:string;
     shadow?: string;
     shadowHover?: string;
+    fontFamily:string;
   }
 }
 
@@ -26,7 +30,9 @@ const themes = {
       mode: "dark",
       background: { default: "#121212" },
       text: { primary: "#FFFFFF", secondary: "#888888" },
+      fontFamily:"Poppins, sans-serif",
       tertiary: "rgb(34, 17, 84)",
+      link:"rgb(118, 32, 134)",
       shadow: "0px 4px 12px rgba(255, 255, 255, 0.1)",
       shadowHover: "0px 6px 18px rgba(255, 255, 255, 0.2)",
     },
@@ -37,23 +43,14 @@ const themes = {
       mode: "light",
       background: { default: "#FFFFFF" },
       text: { primary: "#000000", secondary: "#555555" },
-      tertiary: "rgb(34, 17, 84)",
+      fontFamily:"Poppins, sans-serif",
+      tertiary: "rgb(118, 32, 134)",
+      link:"rgb(116, 13, 134)",
       shadow: "0px 2px 6px rgba(0, 0, 0, 0.15)",
       shadowHover: "0px 4px 12px rgba(0, 0, 0, 0.2)",
     },
   }),
-  // dark: createTheme({
-  //   palette: {
-  //     mode: "dark",
-  //     background: { default: "#2E0249", paper:"0px 4px 12px rgb(97, 38, 129)" },
-  //     text: { primary: "#FFFFFF", secondary: "EBD3F8" },
-  //     tertiary: "#A8A196",
-  //     shadow: "0px 4px 12px #9e61bf",
-  //     shadowHover: "0px 6px 18px rgba(135, 95, 150, 0.2)",
-  //   },
-  // }),
-  
-  
+    
 };
 
 export default themes;

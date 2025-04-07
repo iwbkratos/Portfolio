@@ -26,14 +26,14 @@ const Contact = () => {
         textAlign: "center",
       }}
     >
-      <Typography variant="h4" component="h2" fontWeight="bold" mb={2}>
+      <Typography variant="h4" component="h2" fontWeight="bold" mb={2} fontFamily={themes[currentTheme].palette.fontFamily}>
         Contact Me
       </Typography>
       <Typography 
         variant="body1" 
         color={themes[currentTheme].palette.text.secondary} 
         mb={3} 
-        sx={{ maxWidth: "600px" }}
+        sx={{ maxWidth: "600px", fontFamily:themes[currentTheme].palette.fontFamily }}
       >
         Feel free to connect with me on the following platforms:
       </Typography>
@@ -70,6 +70,7 @@ const Contact = () => {
                 color: themes[currentTheme].palette.text.primary,
                 fontWeight: "bold",
                 fontSize: "14px",
+                fontFamily:themes[currentTheme].palette.fontFamily
               }}
             >
               {link.name}

@@ -1,8 +1,7 @@
 'use client'
 import React from "react";
-import { Typography, Box, Card, CardMedia, Button } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import { useThemeContext } from "../app/ThemeContext";
-import LinkIcon from "@mui/icons-material/Link";
 import Image from "next/image";
 
 const socialLinks = [

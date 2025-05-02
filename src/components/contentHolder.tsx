@@ -11,7 +11,7 @@ const experiences = [
     company: "Solverines Technology Solutions",
     duration: "March 2024 - Present",
     description: [
-      "Developed a functionality to retrieve transaction details, including invoice payments, bill payments, and deposits, using ASP.NET Core & Entity Framework.",
+      "Developed a functionality to retrieve transaction details, including invoice payments, bill payments, and deposits, using Spring boot.",
       "Implemented a streamlined payment and deposit process, reducing processing time and enhanced user experience.",
       "Integrated Sure App into a Next.js project via Iframe, streamlining renter insurance processes and boosted operational efficiency.",
       "Utilized Redux Toolkit and TypeScript for state management in a Next.js app, reducing API calls by 25% and boosting app responsiveness.",
